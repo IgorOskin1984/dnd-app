@@ -15,14 +15,17 @@ function App() {
 		setCurrentCard(card);
 		e.target.style.backgroundColor = '#61dafb';
 	};
-	const onDragLeaveHandle = (e) => {
-		e.target.style.background = '#61dafb';
-	};
-	const onDragEndHandle = (e) => { };
+
 	const onDragOverHandle = (e) => {
 		e.preventDefault();
 		e.target.style.backgroundColor = 'lightgreen';
 	};
+
+	const onDragLeaveHandle = (e) => {
+		e.target.style.background = '#61dafb';
+	};
+	const onDragEndHandle = (e) => { };
+
 	const onDropHandle = (e, onDropCard) => {
 		e.preventDefault();
 		setCardList(
@@ -40,76 +43,27 @@ function App() {
 	};
 
 
-
-	//const onTouchStartHandle = (e, card) => {
-	//	console.log('onTouchStartHandle');
-	//	setCurrentCard(card);
-	//	e.target.style.backgroundColor = '#61dafb';
-	//};
-	//const onTouchEndHandle = (e) => { };
-	//const onTouchMoveHandle = (e) => {
-	//	console.log('onTouchMoveHandle');
-	//	e.target.style.backgroundColor = 'lightgreen';
-	//};
-	//const onTouchCancelHandle = (e) => {
-	//	e.target.style.background = '#61dafb';
-	//};
-	//const onTouchDropHandle = (e, onDropCard) => {
-	//	e.preventDefault();
-	//	setCardList(
-	//		cardList.map((card) => {
-	//			if (card.id === onDropCard.id) {
-	//				return { ...card, order: currentCard.order };
-	//			}
-	//			if (card.id === currentCard.id) {
-	//				return { ...card, order: onDropCard.order };
-	//			}
-	//			return card;
-	//		})
-	//	);
-	//	e.target.style.backgroundColor = '';
-	//};
-
 	const sortCards = (a, b) => {
 		if (a.order > b.order) return 1;
 		else return -1;
 	};
 
 
-
-
-
-
-
 	return (
 		<div className='App'>
 			<div className="wrapper">
-				<DnDBoards />
+				{/*<DnDBoards />*/}
 				<div className='body'>
 					{cardList.sort(sortCards).map((card) => (
 						<div
 							className="card"
 							key={card.id}
 							onDragStart={(e) => onDragStartHandle(e, card)}
+							onDragOver={(e) => onDragOverHandle(e)}
 							onDragLeave={(e) => onDragLeaveHandle(e)}
 							onDragEnd={(e) => onDragEndHandle(e)}
-							onDragOver={(e) => onDragOverHandle(e)}
 							onDrop={(e) => onDropHandle(e, card)}
 							draggable={true}
-
-
-							onTouchStart={(e) => console.log('onTouchStart')}
-							onTouchStartCapture={(e) => console.log('onTouchStartCapture')}
-
-							//onTouchMove={(e) => console.log('')}
-							//onTouchMoveCapture={(e) => console.log('')}
-
-							onTouchEnd={(e) => console.log('onTouchEnd')}
-							onTouchEndCapture={(e) => console.log('onTouchEndCapture')}
-
-
-						//onTouchCancel={(e) => console.log('')}
-						//onTouchCancelCapture={(e) => console.log('')}
 						>
 							{card.text}
 						</div>
