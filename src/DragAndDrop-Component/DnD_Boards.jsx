@@ -12,10 +12,12 @@ export const DnDBoards = () => {
 	const [boards, setBoards] = useState(initialBoards)
 	const [currentBoard, setCurrentBoard] = useState(null)
 	const [currentTask, setCurrentTask] = useState(null)
+	const [isDragging, setIsDragging] = useState(false)
 
 	const onDragStartHandle = (e, board, item) => {
 		setCurrentBoard(board)
 		setCurrentTask(item)
+		setIsDragging(true)
 	}
 
 	const onDragOverHandle = (e) => {
@@ -41,6 +43,7 @@ export const DnDBoards = () => {
 	}
 
 	const onDropHandle = (e, onDropBoard, onDropItem) => {
+		debugger
 		e.preventDefault();
 		e.target.style.boxShadow = 'none'
 		e.target.style.scale = '1'
@@ -51,16 +54,22 @@ export const DnDBoards = () => {
 		onDropBoard.items.splice(dpopIndex, 0, currentTask)
 
 		setBoardsHandle(onDropBoard)
+		setIsDragging(false)
 	}
 
-	const onCardHandle = (e, onDropBoard) => {
+	const onCardDropHandle = (e, onDropBoard) => {
+		debugger
 		if (!onDropBoard.items.length) {
 			onDropBoard.items.push(currentTask)
 			const currentIndex = currentBoard.items.indexOf(currentTask)
 			currentBoard.items.splice(currentIndex, 1)
-
 			setBoardsHandle(onDropBoard)
-
+			setIsDragging(false)
+		}
+		else {
+			console.log(isDragging);
+			onDropBoard.items.push(currentTask)
+			setBoardsHandle(onDropBoard)
 		}
 	}
 
@@ -87,7 +96,7 @@ export const DnDBoards = () => {
 				return (
 					<div key={board.title} className='list' id={board.id}
 						onDragOver={(e) => onDragOverHandle(e)}
-						onDrop={(e) => onCardHandle(e, board)}
+						onDrop={(e) => onCardDropHandle(e, board)}
 					>
 						<div className="title">{board.title}</div>
 						{board.items.map((item) => {
