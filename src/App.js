@@ -1,8 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 
 function App() {
+
 
 	const [cardList, setCardList] = useState([
 		{ id: 1, order: 4, text: 'Card 4' },
@@ -50,20 +52,23 @@ function App() {
 
 
 	return (
-		<div className="App">
-			{cardList.sort(sortCards).map((card) => (
-				<div className='card'
-					key={card.id}
-					onDragStart={(e) => onDragStartHandle(e, card)}
-					onDragLeave={(e) => onDragLeaveHandle(e)}
-					onDragEnd={(e) => onDragEndHandle(e)}
-					onDragOver={(e) => onDragOverHandle(e)}
-					onDrop={(e) => onDropHandle(e, card)}
-					draggable={true}
-				>
-					{card.text}
-				</div>
-			))}
+		<div>
+			<DnDBoards />
+			<div className="App">
+				{cardList.sort(sortCards).map((card) => (
+					<div className='card'
+						key={card.id}
+						onDragStart={(e) => onDragStartHandle(e, card)}
+						onDragLeave={(e) => onDragLeaveHandle(e)}
+						onDragEnd={(e) => onDragEndHandle(e)}
+						onDragOver={(e) => onDragOverHandle(e)}
+						onDrop={(e) => onDropHandle(e, card)}
+						draggable={true}
+					>
+						{card.text}
+					</div>
+				))}
+			</div>
 		</div>
 	);
 }
