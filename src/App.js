@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
+//import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 
 function App() {
 	const [cardList, setCardList] = useState([
@@ -11,20 +11,25 @@ function App() {
 	]);
 	const [currentCard, setCurrentCard] = useState(null);
 
-	const onDragStartHandle = (e, card) => {
+	const onPointerDownHandle = (e, card) => {
 		setCurrentCard(card);
 		e.target.style.backgroundColor = '#61dafb';
 	};
 
-	const onDragOverHandle = (e) => {
+	const onPointerMoveHandle = (e) => {
 		e.preventDefault();
 		e.target.style.backgroundColor = 'lightgreen';
 	};
 
-	const onDragLeaveHandle = (e) => {
-		e.target.style.background = '#61dafb';
+	const onPointerUpHandle = (e) => {
+		e.preventDefault();
+		e.target.style.background = '';
 	};
-	const onDragEndHandle = (e) => { };
+
+	const onPointerCancelHandle = (e) => {
+		e.preventDefault();
+		e.target.style.background = '';
+	};
 
 	const onDropHandle = (e, onDropCard) => {
 		e.preventDefault();
@@ -58,10 +63,12 @@ function App() {
 						<div
 							className="card"
 							key={card.id}
-							onDragStart={(e) => onDragStartHandle(e, card)}
-							onDragOver={(e) => onDragOverHandle(e)}
-							onDragLeave={(e) => onDragLeaveHandle(e)}
-							onDragEnd={(e) => onDragEndHandle(e)}
+							onPointerDown={(e) => onPointerDownHandle(e, card)}
+							onPointerMove={(e) => onPointerMoveHandle(e)}
+							onPointerUp={(e) => onPointerUpHandle(e)}
+							onPointerCancel={(e) => onPointerCancelHandle(e)}
+							onPointerLeave={(e) => onPointerCancelHandle(e)}
+							onPointerOut={(e) => onPointerCancelHandle(e)}
 							onDrop={(e) => onDropHandle(e, card)}
 							draggable={true}
 						>
