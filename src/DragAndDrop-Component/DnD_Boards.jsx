@@ -92,6 +92,7 @@ export const DnDBoards = () => {
 
 	return (
 		<div className='container'>
+
 			{boards.map((board) => {
 				return (
 					<div key={board.title} className='list' id={board.id}
