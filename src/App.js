@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 
 //ES7+ React/Redux/React-Native snippets
+//rafce - создаёт компоненту
+
 
 function App() {
 	const [cardList, setCardList] = useState([
