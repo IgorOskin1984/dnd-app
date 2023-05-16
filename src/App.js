@@ -33,7 +33,7 @@ function App() {
 					{/*<DnDBoards />*/}
 					<div className='body'>
 						{cardList.map(card => <Card
-							key={card.id}
+							key={new Date().getTime() + Math.floor(Math.random() * 1000)}
 							id={card.id}
 							text={card.text}
 						/>)}
