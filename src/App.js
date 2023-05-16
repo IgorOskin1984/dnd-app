@@ -2,6 +2,8 @@ import './App.css';
 import { useState } from 'react';
 import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 
+//ES7+ React/Redux/React-Native snippets
+
 function App() {
 	const [cardList, setCardList] = useState([
 		{ id: 1, order: 4, text: 'Card 4' },
