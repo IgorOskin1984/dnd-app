@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -10,50 +10,20 @@ import Card from './DragAndDrop-Component/BigCard';
 
 
 function App() {
-	const [cardList, setCardList] = useState([
-		{ id: 1, order: 4, text: 'Card 4' },
-		{ id: 2, order: 3, text: 'Card 3' },
-		{ id: 3, order: 2, text: 'Card 2' },
-		{ id: 4, order: 1, text: 'Card 1' }
-	]);
+	const [cardList, setCardList] = useState([]);
 	const [currentCard, setCurrentCard] = useState(null);
 
-	const onDragStartHandle = (e, card) => {
-		setCurrentCard(card);
-		e.target.style.backgroundColor = '#61dafb';
-	};
-
-	const onDragOverHandle = (e) => {
-		e.preventDefault();
-		e.target.style.backgroundColor = 'lightgreen';
-	};
-
-	const onDragLeaveHandle = (e) => {
-		e.target.style.background = '#61dafb';
-	};
-	const onDragEndHandle = (e) => { };
-
-	const onDropHandle = (e, onDropCard) => {
-		e.preventDefault();
-		setCardList(
-			cardList.map((card) => {
-				if (card.id === onDropCard.id) {
-					return { ...card, order: currentCard.order };
-				}
-				if (card.id === currentCard.id) {
-					return { ...card, order: onDropCard.order };
-				}
-				return card;
-			})
-		);
-		e.target.style.backgroundColor = '';
-	};
-
-
-	const sortCards = (a, b) => {
-		if (a.order > b.order) return 1;
-		else return -1;
-	};
+	useEffect(() => {
+		const initialState = [
+			{ id: 1, order: 4, text: 'Card 4' },
+			{ id: 2, order: 3, text: 'Card 3' },
+			{ id: 3, order: 2, text: 'Card 2' },
+			{ id: 4, order: 1, text: 'Card 1' }
+		]
+		localStorage.setItem('cardList', JSON.stringify(initialState))
+		const listArray = JSON.parse(localStorage.getItem('cardList'))
+		setCardList(listArray)
+	}, [])
 
 
 	return (
