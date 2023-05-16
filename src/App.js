@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import Card from './DragAndDrop-Component/BigCard';
 
 //ES7+ React/Redux/React-Native snippets
 //rafce - создаёт компоненту
@@ -61,20 +62,11 @@ function App() {
 				<div className="wrapper">
 					{/*<DnDBoards />*/}
 					<div className='body'>
-						{cardList.sort(sortCards).map((card) => (
-							<div
-								className="card"
-								key={card.id}
-								onDragStart={(e) => onDragStartHandle(e, card)}
-								onDragOver={(e) => onDragOverHandle(e)}
-								onDragLeave={(e) => onDragLeaveHandle(e)}
-								onDragEnd={(e) => onDragEndHandle(e)}
-								onDrop={(e) => onDropHandle(e, card)}
-								draggable={true}
-							>
-								{card.text}
-							</div>
-						))}
+						{cardList.map(card => <Card
+							key={card.id}
+							id={card.id}
+							text={card.text}
+						/>)}
 					</div>
 				</div>
 			</div>
