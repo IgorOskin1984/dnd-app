@@ -4,7 +4,6 @@ import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Card from './DragAndDrop-Component/BigCard';
-import Bin from './DragAndDrop-Component/Bin';
 
 //ES7+ React/Redux/React-Native snippets
 //rafce - создаёт компоненту
@@ -39,7 +38,6 @@ function App() {
 							text={card.text}
 						/>)}
 					</div>
-					<Bin />
 				</div>
 			</div>
 		</DndProvider>
