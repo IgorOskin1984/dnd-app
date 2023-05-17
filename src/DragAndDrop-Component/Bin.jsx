@@ -10,7 +10,9 @@ const Bin = () => {
 		})
 	}), [],)
 	return (
-		<div className="bin">Bin</div>
+		<div className="bin" ref={drop}>
+			<h2>Bin</h2>
+		</div>
 	)
 }
 
