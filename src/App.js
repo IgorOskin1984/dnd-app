@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -12,6 +12,11 @@ import Card from './DragAndDrop-Component/BigCard';
 function App() {
 	const [cardList, setCardList] = useState([]);
 	const [currentCard, setCurrentCard] = useState(null);
+
+	const moveCard = (dragIndex, hoverIndex) => {
+		debugger
+		alert('hello')
+	}
 
 	useEffect(() => {
 		const initialState = [
@@ -32,10 +37,12 @@ function App() {
 				<div className="wrapper">
 					{/*<DnDBoards />*/}
 					<div className='body'>
-						{cardList.map(card => <Card
+						{cardList.map((card, i) => <Card
 							key={new Date().getTime() + Math.floor(Math.random() * 1000)}
 							id={card.id}
+							index={i}
 							text={card.text}
+							moveCard={moveCard}
 						/>)}
 					</div>
 				</div>
