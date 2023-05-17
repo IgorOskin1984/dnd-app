@@ -2,7 +2,7 @@ import { useDrop } from "react-dnd"
 
 const Bin = () => {
 	const [{ canDrop, isOver }, drop] = useDrop(() => ({
-		accept: 'note',
+		accept: 'card',
 		drop: () => ({ name: 'the bin' }),
 		collect: monitor => ({
 			isOver: !!monitor.isOver(),

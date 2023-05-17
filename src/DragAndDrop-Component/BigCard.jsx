@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd'
 
 const Card = ({ id, text }) => {
 	const [{ isDragging }, drag] = useDrag(() => ({
-		type: 'note',
+		type: 'card',
 		//item: { id, text },
 		item: { name: text },
 		end: (item, monitor) => {
