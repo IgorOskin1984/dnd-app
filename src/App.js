@@ -20,12 +20,25 @@ function App() {
 
 		const dragOrder = dragCard.order;
 		const dropOrder = dropCard.order;
+
 		dragCard.order = dropOrder;
 		dropCard.order = dragOrder;
 
+		cardList.map((card) => {
+			if (card.id === dragCard.id) {
+				return card = dragCard
+			}
+			if (card.id === dropCard.id) {
+				return card = dropCard
+			}
+			return card
+		})
+		localStorage.setItem('cardList', JSON.stringify(cardList))
+		setCardList([...cardList])
 	};
 
 	const sortCardList = (a, b) => {
+		//debugger
 		return a.order - b.order;
 	}
 
