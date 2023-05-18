@@ -55,12 +55,6 @@ function App() {
 		setCardList(listArray)
 	}, [])
 
-	//useEffect(() => {
-	//	const arr = JSON.parse(localStorage.getItem('cardList'));
-	//	console.log(arr);
-	//	setCardList(arr)
-	//}, [])
-
 
 	return (
 		<DndProvider backend={HTML5Backend}>

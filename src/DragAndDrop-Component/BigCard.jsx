@@ -21,23 +21,31 @@ const Card = ({ id, text, index, apdateState }) => {
 	}), [],)
 
 
-	const [{ handlerId }, drop] = useDrop(() => ({
+	const [{ handlerId, isOver }, drop] = useDrop(() => ({
 		accept: 'card',
-		drop: (item, monitor) => {
-			return { id };
+		drop: (item) => {
+			return { id, };
 		},
 		collect(monitor) {
 			return {
 				handlerId: monitor.getHandlerId(),
+				isOver: !!monitor.isOver(),
 			}
 		},
 	}))
+
+	const className = () => {
+		if (isOver) {
+			return 'card isOver'
+		}
+		else return 'card'
+	}
 
 	drag(drop(ref))
 	//console.log('render')
 	return (
 		<div id={id} ref={ref}
-			className='card' >{text}</div>
+			className={className()} >{text}</div>
 	)
 }
 

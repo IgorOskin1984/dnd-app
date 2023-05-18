@@ -28,6 +28,10 @@
 	transition: background-color .3s ease 0s;
 }
 
+.isOver {
+	background-color: #f8fb61;
+}
+
 .bin {
 	padding: 20px;
 	width: 90%;
