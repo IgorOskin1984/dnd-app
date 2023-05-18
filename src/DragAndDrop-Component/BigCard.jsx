@@ -20,11 +20,44 @@ const Card = ({ id, text, order, index, apdateState }) => {
 		})
 	}), [],)
 
+	const hoverHandle = (item, monitor) => {
+		//debugger
+		if (!ref.current) {
+			return
+		}
+		console.log(item);
+		const dragIndex = item.order
+		const hoverIndex = index
+		if (dragIndex === hoverIndex) {
+			return
+		}
+
+		const hoverCardCordinates = ref.current?.getBoundingClientRect()
+		//console.log(hoverCardCordinates);
+
+		const hoverMiddleX =
+			(hoverCardCordinates.right - hoverCardCordinates.left) / 2
+
+		const clientOffset = monitor.getClientOffset()
+
+		const hoverClientX = clientOffset.x - hoverCardCordinates.right
+
+		if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
+			return
+		}
+		if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
+			return
+		}
+
+		//apdateState(dragIndex, hoverIndex)
+		console.log(dragIndex, hoverIndex);
+	}
+
 
 	const [{ handlerId, isOver }, drop] = useDrop(() => ({
 		accept: 'card',
 		drop: (item) => {
-			return { id, };
+			return { id };
 		},
 		collect(monitor) {
 			return {
@@ -32,37 +65,7 @@ const Card = ({ id, text, order, index, apdateState }) => {
 				isOver: !!monitor.isOver(),
 			}
 		},
-		hover(item, monitor) {
-			//debugger
-			if (!ref.current) {
-				return
-			}
-			const dragIndex = item.order
-			const hoverIndex = index
-			if (dragIndex === hoverIndex) {
-				return
-			}
-			// Determine rectangle on screen
-			const hoverBoundingRect = ref.current?.getBoundingClientRect()
-			// Get vertical middle
-			const hoverMiddleY =
-				(hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-			// Determine mouse position
-			const clientOffset = monitor.getClientOffset()
-			// Get pixels to the top
-			const hoverClientY = clientOffset.y - hoverBoundingRect.top
-			// When dragging upwards, only move when the cursor is above 50%
-			// Dragging downwards
-			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-				return
-			}
-			// Dragging upwards
-			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-				return
-			}
-			apdateState(dragIndex, hoverIndex)
-			item.index = hoverIndex
-		}
+		hover: hoverHandle
 	}))
 
 	const className = () => {
