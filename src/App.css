@@ -28,9 +28,14 @@
 	transition: background-color .3s ease 0s;
 }
 
-.isOver {
-	background-color: #f8fb61;
+.isDragging {
+	opacity: 0.5;
+	/*visibility: hidden;*/
 }
+
+/*.isOver {
+	background-color: #f8fb61;
+}*/
 
 .bin {
 	padding: 20px;

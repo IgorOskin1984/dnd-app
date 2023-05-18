@@ -13,6 +13,7 @@ function App() {
 	const [cardList, setCardList] = useState([]);
 
 	const apdateState = (dragId, dropId) => {
+		//debugger
 		const dragIndex = cardList.findIndex((card) => card.id === dragId);
 		const dragCard = cardList[dragIndex];
 		const dropIndex = cardList.findIndex((card) => card.id === dropId);
@@ -34,6 +35,7 @@ function App() {
 			return card
 		})
 		localStorage.setItem('cardList', JSON.stringify(cardList))
+		console.log(cardList);
 		setCardList([...cardList])
 	};
 
@@ -65,6 +67,7 @@ function App() {
 						{cardList.sort(sortCardList).map((card, i) => <Card
 							key={new Date().getTime() + Math.floor(Math.random() * 1000)}
 							id={card.id}
+							order={card.order}
 							index={i}
 							text={card.text}
 							apdateState={apdateState}
