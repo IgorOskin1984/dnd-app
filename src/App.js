@@ -15,7 +15,16 @@ function App() {
 	const apdateState = (dragId, dropId) => {
 		console.log(dragId);
 		console.log(dropId);
+		//cardList.map((card) => {
+		//	return (
+
+		//	)
+		//})
 		//return setCardList(newState)
+	}
+
+	const sortCardList = (a, b) => {
+		return a.order - b.order;
 	}
 
 
@@ -45,7 +54,7 @@ function App() {
 				<div className="wrapper">
 					{/*<DnDBoards />*/}
 					<div className='body'>
-						{cardList.map((card, i) => <Card
+						{cardList.sort(sortCardList).map((card, i) => <Card
 							key={new Date().getTime() + Math.floor(Math.random() * 1000)}
 							id={card.id}
 							index={i}
