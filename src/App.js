@@ -37,10 +37,7 @@ function App() {
 		setCardList([...cardList])
 	};
 
-	const sortCardList = (a, b) => {
-		//debugger
-		return a.order - b.order;
-	}
+	const sortCardList = (a, b) => a.order - b.order;
 
 
 	useEffect(() => {
@@ -50,8 +47,10 @@ function App() {
 			{ id: 2, order: 2, text: 'Card 2' },
 			{ id: 1, order: 1, text: 'Card 1' }
 		]
-		localStorage.setItem('cardList', JSON.stringify(initialState))
 		const listArray = JSON.parse(localStorage.getItem('cardList'))
+		if (!listArray) {
+			localStorage.setItem('cardList', JSON.stringify(initialState))
+		}
 		console.log('useeffect1');
 		setCardList(listArray)
 	}, [])
