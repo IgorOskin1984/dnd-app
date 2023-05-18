@@ -11,12 +11,13 @@ import Card from './DragAndDrop-Component/BigCard';
 
 function App() {
 	const [cardList, setCardList] = useState([]);
-	const [currentCard, setCurrentCard] = useState(null);
 
-	const moveCard = (dragIndex, hoverIndex) => {
-		debugger
-		alert('hello')
+	const apdateState = (dragId, dropId) => {
+		console.log(dragId);
+		console.log(dropId);
+		//return setCardList(newState)
 	}
+
 
 	useEffect(() => {
 		const initialState = [
@@ -27,8 +28,15 @@ function App() {
 		]
 		localStorage.setItem('cardList', JSON.stringify(initialState))
 		const listArray = JSON.parse(localStorage.getItem('cardList'))
+		console.log('useeffect1');
 		setCardList(listArray)
 	}, [])
+
+	//useEffect(() => {
+	//	const arr = JSON.parse(localStorage.getItem('cardList'));
+	//	console.log(arr);
+	//	setCardList(arr)
+	//}, [])
 
 
 	return (
@@ -42,7 +50,7 @@ function App() {
 							id={card.id}
 							index={i}
 							text={card.text}
-							moveCard={moveCard}
+							apdateState={apdateState}
 						/>)}
 					</div>
 				</div>
