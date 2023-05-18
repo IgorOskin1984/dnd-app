@@ -70,6 +70,7 @@ function App() {
 							order={card.order}
 							index={i}
 							text={card.text}
+							cardList={cardList}
 							apdateState={apdateState}
 						/>)}
 					</div>

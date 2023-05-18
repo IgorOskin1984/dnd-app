@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
-const Card = ({ id, text, order, index, apdateState }) => {
+const Card = ({ id, text, order, index, cardList, apdateState }) => {
 	const ref = useRef(null)
 
 	const [{ isDragging }, drag] = useDrag(() => ({
@@ -19,40 +19,25 @@ const Card = ({ id, text, order, index, apdateState }) => {
 			isDragging: !!monitor.isDragging(),
 		})
 	}), [],)
+	//========================================================================================================================================================
 
 	const hoverHandle = (item, monitor) => {
 		//debugger
-		if (!ref.current) {
+		const dropId = parseInt(ref.current.id);
+		if (item.id === dropId) {
 			return
 		}
-		console.log(item);
-		const dragIndex = item.order
-		const hoverIndex = index
-		if (dragIndex === hoverIndex) {
-			return
-		}
-
-		const hoverCardCordinates = ref.current?.getBoundingClientRect()
-		//console.log(hoverCardCordinates);
-
-		const hoverMiddleX =
-			(hoverCardCordinates.right - hoverCardCordinates.left) / 2
+		const hoverBoundingRect = ref.current.getBoundingClientRect()
+		const rightSide = hoverBoundingRect.right - (hoverBoundingRect.right - hoverBoundingRect.left) / 3
+		const leftSide = hoverBoundingRect.left + (hoverBoundingRect.right - hoverBoundingRect.left) / 3
 
 		const clientOffset = monitor.getClientOffset()
 
-		const hoverClientX = clientOffset.x - hoverCardCordinates.right
-
-		if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
-			return
+		if (clientOffset.x >= leftSide && clientOffset.x <= rightSide) {
+			apdateState(item.id, dropId)
 		}
-		if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
-			return
-		}
-
-		//apdateState(dragIndex, hoverIndex)
-		console.log(dragIndex, hoverIndex);
 	}
-
+	//========================================================================================================================================================
 
 	const [{ handlerId, isOver }, drop] = useDrop(() => ({
 		accept: 'card',
@@ -66,7 +51,7 @@ const Card = ({ id, text, order, index, apdateState }) => {
 			}
 		},
 		hover: hoverHandle
-	}))
+	}), [hoverHandle])
 
 	const className = () => {
 		if (isDragging) {
