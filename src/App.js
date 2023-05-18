@@ -13,15 +13,17 @@ function App() {
 	const [cardList, setCardList] = useState([]);
 
 	const apdateState = (dragId, dropId) => {
-		console.log(dragId);
-		console.log(dropId);
-		//cardList.map((card) => {
-		//	return (
+		const dragIndex = cardList.findIndex((card) => card.id === dragId);
+		const dragCard = cardList[dragIndex];
+		const dropIndex = cardList.findIndex((card) => card.id === dropId);
+		const dropCard = cardList[dropIndex];
 
-		//	)
-		//})
-		//return setCardList(newState)
-	}
+		const dragOrder = dragCard.order;
+		const dropOrder = dropCard.order;
+		dragCard.order = dropOrder;
+		dropCard.order = dragOrder;
+
+	};
 
 	const sortCardList = (a, b) => {
 		return a.order - b.order;
@@ -30,10 +32,10 @@ function App() {
 
 	useEffect(() => {
 		const initialState = [
-			{ id: 1, order: 4, text: 'Card 4' },
-			{ id: 2, order: 3, text: 'Card 3' },
-			{ id: 3, order: 2, text: 'Card 2' },
-			{ id: 4, order: 1, text: 'Card 1' }
+			{ id: 4, order: 4, text: 'Card 4' },
+			{ id: 3, order: 3, text: 'Card 3' },
+			{ id: 2, order: 2, text: 'Card 2' },
+			{ id: 1, order: 1, text: 'Card 1' }
 		]
 		localStorage.setItem('cardList', JSON.stringify(initialState))
 		const listArray = JSON.parse(localStorage.getItem('cardList'))
