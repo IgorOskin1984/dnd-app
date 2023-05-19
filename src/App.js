@@ -35,7 +35,6 @@ function App() {
 			return card
 		})
 		localStorage.setItem('cardList', JSON.stringify(cardList))
-		console.log(cardList);
 		setCardList([...cardList])
 	};
 
@@ -53,7 +52,6 @@ function App() {
 		if (!listArray) {
 			localStorage.setItem('cardList', JSON.stringify(initialState))
 		}
-		console.log('useeffect1');
 		setCardList(listArray)
 	}, [])
 

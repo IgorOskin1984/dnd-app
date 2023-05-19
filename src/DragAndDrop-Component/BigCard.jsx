@@ -22,11 +22,11 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 	//========================================================================================================================================================
 
 	const hoverHandle = (item, monitor) => {
-		//debugger
 		const dropId = parseInt(ref.current.id);
 		if (item.id === dropId) {
 			return
 		}
+		//debugger
 		const hoverBoundingRect = ref.current.getBoundingClientRect()
 		const rightSide = hoverBoundingRect.right - (hoverBoundingRect.right - hoverBoundingRect.left) / 3
 		const leftSide = hoverBoundingRect.left + (hoverBoundingRect.right - hoverBoundingRect.left) / 3
@@ -34,31 +34,32 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 		const clientOffset = monitor.getClientOffset()
 
 		if (clientOffset.x >= leftSide && clientOffset.x <= rightSide) {
+			//debugger
 			apdateState(item.id, dropId)
 		}
+		let isDragg = !monitor.isOver()
 	}
 	//========================================================================================================================================================
 
-	const [{ handlerId, isOver }, drop] = useDrop(() => ({
+	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'card',
 		drop: (item) => {
 			return { id };
 		},
 		collect(monitor) {
 			return {
-				handlerId: monitor.getHandlerId(),
-				isOver: !!monitor.isOver(),
+				isOver: monitor.isOver(),
 			}
 		},
 		hover: hoverHandle
-	}), [hoverHandle])
+	}), [hoverHandle, apdateState])
 
 	const className = () => {
 		if (isDragging) {
 			return 'card isDragging'
 		}
 		if (isOver) {
-			return 'card isOver'
+			return 'isOver card'
 		}
 		else return 'card'
 	}
