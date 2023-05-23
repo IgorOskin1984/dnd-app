@@ -20,22 +20,22 @@ const Card = ({ id, text, order, apdateState }) => {
 		const hoverOrder = order;
 		console.log(dragOrder, hoverOrder);
 
-		//if (item.order === dropOrder) {
-		//	return
-		//}
-		//const hoverBoundingRect = ref.current?.getBoundingClientRect()
-		//const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-		//const clientOffset = monitor.getClientOffset()
-		//const hoverClientX = clientOffset.x - hoverBoundingRect.left;
-		//if (item.order < dropOrder && hoverClientX < hoverMiddleX) {
-		//	return
-		//}
-		//if (item.order > dropOrder && hoverClientX > hoverMiddleX) {
-		//	return
-		//}
+		if (dragOrder === hoverOrder) {
+			return
+		}
+		const hoverBoundingRect = ref.current?.getBoundingClientRect()
+		const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+		const clientOffset = monitor.getClientOffset()
+		const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+		if (dragOrder < hoverOrder && hoverClientX < hoverMiddleX) {
+			return
+		}
+		if (dragOrder > hoverOrder && hoverClientX > hoverMiddleX) {
+			return
+		}
 
-		//apdateState(item.order, dropOrder);
-		//item.order = dropOrder;
+		apdateState(dragOrder, hoverOrder);
+		item.order = hoverOrder;
 	}
 	//========================================================================================================================================================
 
