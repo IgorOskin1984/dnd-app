@@ -12,32 +12,6 @@ const Card = ({ id, text, order, apdateState }) => {
 			isDragging: !!monitor.isDragging(),
 		})
 	}), [],)
-	//========================================================================================================================================================
-
-	const hoverHandle = (item, monitor) => {
-		//debugger
-		const dragOrder = item.order;
-		const hoverOrder = order;
-		console.log(dragOrder, hoverOrder);
-
-		if (dragOrder === hoverOrder) {
-			return
-		}
-		const hoverBoundingRect = ref.current?.getBoundingClientRect()
-		const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-		const clientOffset = monitor.getClientOffset()
-		const hoverClientX = clientOffset.x - hoverBoundingRect.left;
-		if (dragOrder < hoverOrder && hoverClientX < hoverMiddleX) {
-			return
-		}
-		if (dragOrder > hoverOrder && hoverClientX > hoverMiddleX) {
-			return
-		}
-
-		apdateState(dragOrder, hoverOrder);
-		item.order = hoverOrder;
-	}
-	//========================================================================================================================================================
 
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'card',
@@ -46,7 +20,28 @@ const Card = ({ id, text, order, apdateState }) => {
 				isOver: monitor.isOver(),
 			}
 		},
-		hover: hoverHandle
+		hover: (item, monitor) => {
+			const dragOrder = item.order;
+			const hoverOrder = order;
+			console.log(dragOrder, hoverOrder);
+
+			if (dragOrder === hoverOrder) {
+				return
+			}
+			const hoverBoundingRect = ref.current?.getBoundingClientRect()
+			const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+			const clientOffset = monitor.getClientOffset()
+			const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+			if (dragOrder < hoverOrder && hoverClientX < hoverMiddleX) {
+				return
+			}
+			if (dragOrder > hoverOrder && hoverClientX > hoverMiddleX) {
+				return
+			}
+
+			apdateState(dragOrder, hoverOrder);
+			item.order = hoverOrder;
+		}
 	}))
 
 	const className = () => {
