@@ -6,6 +6,7 @@ const Card = ({ id, order, text, cardList, moveCard }) => {
 	//========================================================================================================================================================
 
 	const hoverHandle = (item, monitor) => {
+		if (!ref.current) return
 		//debugger
 		const dropOrderFunc = () => {
 			let targetItem = cardList.find((item) => item.id === parseInt(ref.current.id));
@@ -26,9 +27,12 @@ const Card = ({ id, order, text, cardList, moveCard }) => {
 		if (item.order > dropOrder && hoverClientX > hoverMiddleX) {
 			return
 		}
-
 		moveCard(item.order, dropOrder);
+
+
 		item.order = dropOrder;
+		console.log(item);
+
 	}
 	//========================================================================================================================================================
 
@@ -46,7 +50,7 @@ const Card = ({ id, order, text, cardList, moveCard }) => {
 	const [{ isDragging }, drag] = useDrag(() => ({
 		type: 'card',
 		item: () => {
-			return { id, order }
+			return { id, order, text }
 		},
 		//item: { name: text },
 		collect: (monitor) => ({
