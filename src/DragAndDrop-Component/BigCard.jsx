@@ -20,11 +20,12 @@ export const Card = ({ id, order, text, index, moveCard }) => {
 			if (!ref.current) {
 				return
 			}
-			console.log(item);
-			const dragIndex = item.index
-			const hoverIndex = index
+			//console.log(item);
+			const dragOrder = item.order
+			const hoverOrder = order
+			console.log(dragOrder, hoverOrder);
 
-			if (dragIndex === hoverIndex) {
+			if (dragOrder === hoverOrder) {
 				return
 			}
 			const hoverBoundingRect = ref.current?.getBoundingClientRect()
@@ -32,21 +33,21 @@ export const Card = ({ id, order, text, index, moveCard }) => {
 			const clientOffset = monitor.getClientOffset()
 			const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
-			if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
+			if (dragOrder < hoverOrder && hoverClientX < hoverMiddleX) {
 				return
 			}
-			if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
+			if (dragOrder > hoverOrder && hoverClientX > hoverMiddleX) {
 				return
 			}
-			moveCard(dragIndex, hoverIndex)
+			moveCard(dragOrder, hoverOrder)
 
-			item.index = hoverIndex
+			item.index = hoverOrder
 		},
 	})
 	const [{ isDragging }, drag] = useDrag({
 		type: 'card',
 		item: () => {
-			return { id, order, index }
+			return { id, order }
 		},
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
