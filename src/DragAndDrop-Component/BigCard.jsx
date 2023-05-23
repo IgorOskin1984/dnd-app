@@ -40,7 +40,7 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 			}
 		},
 		hover: hoverHandle
-	}), [hoverHandle, apdateState])
+	}))
 
 	const className = () => {
 		if (isDragging) {
@@ -53,7 +53,6 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 	}
 
 	drag(drop(ref))
-	//console.log('render')
 	return (
 		<div id={id} ref={ref}
 			className={className()} >{text}</div>
