@@ -10,12 +10,18 @@ import Card from './DragAndDrop-Component/BigCard';
 
 
 function App() {
-	const [cardList, setCardList] = useState([]);
+
+	const [cardList, setCardList] = useState([
+		{ id: 4, order: 4, text: 'Card 4' },
+		{ id: 3, order: 3, text: 'Card 3' },
+		{ id: 2, order: 2, text: 'Card 2' },
+		{ id: 1, order: 1, text: 'Card 1' }
+	]);
 
 	const apdateState = useCallback((dragId, dropId) => {
 		debugger
 		console.log(cardList);
-		//setCardList(cardList)
+		setCardList(cardList)
 
 		//localStorage.setItem('cardList', JSON.stringify(cardList))
 		//console.log('apdate');
@@ -24,20 +30,20 @@ function App() {
 	const sortCardList = (a, b) => a.order - b.order;
 
 
-	useEffect(() => {
-		const initialState = [
-			{ id: 4, order: 4, text: 'Card 4' },
-			{ id: 3, order: 3, text: 'Card 3' },
-			{ id: 2, order: 2, text: 'Card 2' },
-			{ id: 1, order: 1, text: 'Card 1' }
-		]
-		const listArray = JSON.parse(localStorage.getItem('cardList'))
-		//debugger
-		if (!listArray.length) {
-			localStorage.setItem('cardList', JSON.stringify(initialState))
-		}
-		setCardList(listArray)
-	}, [])
+	//useEffect(() => {
+	//	const initialState = [
+	//		{ id: 4, order: 4, text: 'Card 4' },
+	//		{ id: 3, order: 3, text: 'Card 3' },
+	//		{ id: 2, order: 2, text: 'Card 2' },
+	//		{ id: 1, order: 1, text: 'Card 1' }
+	//	]
+	//	const listArray = JSON.parse(localStorage.getItem('cardList'))
+	//	//debugger
+	//	if (!listArray.length) {
+	//		localStorage.setItem('cardList', JSON.stringify(initialState))
+	//	}
+	//	setCardList(listArray)
+	//}, [])
 
 	const renderCard = useCallback((card, i) => {
 		return (
