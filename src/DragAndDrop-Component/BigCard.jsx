@@ -8,13 +8,6 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 		type: 'card',
 		item: { id, order },
 		//item: { name: text },
-		end: (item, monitor) => {
-			const dropResult = monitor.getDropResult()
-			if (item && dropResult) {
-				apdateState(item.id, dropResult.id)
-
-			}
-		},
 		collect: (monitor) => ({
 			isDragging: !!monitor.isDragging(),
 		})
@@ -37,7 +30,6 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 			//debugger
 			apdateState(item.id, dropId)
 		}
-		let isDragg = !monitor.isOver()
 	}
 	//========================================================================================================================================================
 
