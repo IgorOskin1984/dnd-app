@@ -24,9 +24,15 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 		const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 		const clientOffset = monitor.getClientOffset()
 		const hoverClientX = clientOffset.x - hoverBoundingRect.left;
-		if (hoverClientX > hoverMiddleX) {
-			apdateState(item.id, dropId)
+		if (item.id < dropId && hoverClientX < hoverMiddleX) {
+			return
 		}
+		if (item.id > dropId && hoverClientX > hoverMiddleX) {
+			return
+		}
+
+		apdateState(item.id, dropId)
+
 
 
 	}
