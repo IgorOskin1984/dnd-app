@@ -15,8 +15,14 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 	//========================================================================================================================================================
 
 	const hoverHandle = (item, monitor) => {
-		const dropId = parseInt(ref.current.id);
-		if (item.id === dropId) {
+		//debugger
+		const dropOrderFunc = () => {
+			let targetItem = cardList.find((item) => item.id === parseInt(ref.current.id));
+			return targetItem.order
+		}
+		const dropOrder = dropOrderFunc()
+
+		if (item.order === dropOrder) {
 			return
 		}
 		//debugger
@@ -24,14 +30,16 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 		const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 		const clientOffset = monitor.getClientOffset()
 		const hoverClientX = clientOffset.x - hoverBoundingRect.left;
-		if (item.id < dropId && hoverClientX < hoverMiddleX) {
+		if (item.order < dropOrder && hoverClientX < hoverMiddleX) {
 			return
 		}
-		if (item.id > dropId && hoverClientX > hoverMiddleX) {
+		if (item.order > dropOrder && hoverClientX > hoverMiddleX) {
 			return
 		}
 
-		//apdateState(item.id, dropId)
+
+		apdateState(item.order, dropOrder);
+		item.order = dropOrder;
 	}
 	//========================================================================================================================================================
 
