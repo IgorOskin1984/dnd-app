@@ -30,14 +30,11 @@ const Container = () => {
 		)
 	}, [])
 
-	const sortList = (a, b) => {
-		debugger
-		a.order - b.order
-	}
+	const sortList = (a, b) => a.order - b.order
 
 
 	return (
-		<div className='body' >{cardList.sort(sortList()).map((card, i) => renderCard(card, i))}</div>
+		<div className='body' >{cardList.sort(sortList).map((card, i) => renderCard(card, i))}</div>
 	)
 }
 export default Container
