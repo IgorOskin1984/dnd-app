@@ -19,9 +19,9 @@ function App() {
 	]);
 
 	const apdateState = useCallback((dragId, dropId) => {
-		debugger
+		//debugger
 		console.log(cardList);
-		setCardList(cardList)
+		//setCardList(cardList)
 
 		//localStorage.setItem('cardList', JSON.stringify(cardList))
 		//console.log('apdate');

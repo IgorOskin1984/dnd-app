@@ -25,7 +25,6 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 		if (item.order === dropOrder) {
 			return
 		}
-		//debugger
 		const hoverBoundingRect = ref.current?.getBoundingClientRect()
 		const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 		const clientOffset = monitor.getClientOffset()
@@ -36,7 +35,6 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 		if (item.order > dropOrder && hoverClientX > hoverMiddleX) {
 			return
 		}
-
 
 		apdateState(item.order, dropOrder);
 		item.order = dropOrder;
