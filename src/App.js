@@ -18,20 +18,19 @@ function App() {
 		{ id: 1, order: 1, text: 'Card 1' }
 	]);
 
-	const apdateState = useCallback((dragOrder, dropOrder) => {
-		setCardList((prevCardList) => {
-			return prevCardList.map((card, index) => {
-				if (card.order === dragOrder) {
-					card.order = dropOrder
-					return card
-				}
-				if (card.order === dropOrder) {
-					card.order = dragOrder
-					return card
-				}
+	const apdateState = useCallback((dragOrder, hoverOrder) => {
+		setCardList(cardList.map((card) => {
+			if (card.order === dragOrder) {
+				card.order = hoverOrder;
 				return card
-			})
+			}
+			if (card.order === hoverOrder) {
+				card.order = dragOrder;
+				return card
+			}
+			return card
 		})
+		)
 
 		//localStorage.setItem('cardList', JSON.stringify(cardList))
 		//console.log('apdate');
