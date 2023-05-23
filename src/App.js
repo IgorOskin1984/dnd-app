@@ -12,7 +12,7 @@ import Card from './DragAndDrop-Component/BigCard';
 function App() {
 	const [cardList, setCardList] = useState([]);
 
-	const apdateState = (dragId, dropId) => {
+	const apdateState = useCallback((dragId, dropId) => {
 		const dragIndex = cardList.findIndex((card) => card.id === dragId);
 		const dragCard = cardList[dragIndex];
 		const dropIndex = cardList.findIndex((card) => card.id === dropId);
@@ -36,7 +36,7 @@ function App() {
 		localStorage.setItem('cardList', JSON.stringify(cardList))
 		setCardList([...cardList])
 		//console.log('apdate');
-	};
+	})
 
 	const sortCardList = (a, b) => a.order - b.order;
 
@@ -55,6 +55,20 @@ function App() {
 		setCardList(listArray)
 	}, [])
 
+	const renderCard = useCallback((card, i) => {
+		return (
+			<Card
+				key={new Date().getTime() + Math.floor(Math.random() * 1000)}
+				id={card.id}
+				order={card.order}
+				index={i}
+				text={card.text}
+				cardList={cardList}
+				apdateState={apdateState}
+			/>
+		)
+	})
+
 
 	return (
 		<DndProvider backend={HTML5Backend}>
@@ -62,15 +76,7 @@ function App() {
 				<div className="wrapper">
 					{/*<DnDBoards />*/}
 					<div className='body'>
-						{cardList.sort(sortCardList).map((card, i) => <Card
-							key={new Date().getTime() + Math.floor(Math.random() * 1000)}
-							id={card.id}
-							order={card.order}
-							index={i}
-							text={card.text}
-							cardList={cardList}
-							apdateState={apdateState}
-						/>)}
+						{cardList.sort(sortCardList).map((card, i) => renderCard(card, i))}
 					</div>
 				</div>
 			</div>
