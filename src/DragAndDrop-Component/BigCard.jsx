@@ -1,17 +1,8 @@
 import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
-const Card = ({ id, text, order, index, cardList, apdateState }) => {
+const Card = ({ id, order, text, cardList, moveCard }) => {
 	const ref = useRef(null)
-
-	const [{ isDragging }, drag] = useDrag(() => ({
-		type: 'card',
-		item: { id, order },
-		//item: { name: text },
-		collect: (monitor) => ({
-			isDragging: !!monitor.isDragging(),
-		})
-	}), [],)
 	//========================================================================================================================================================
 
 	const hoverHandle = (item, monitor) => {
@@ -36,20 +27,33 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 			return
 		}
 
-		apdateState(item.order, dropOrder);
+		moveCard(item.order, dropOrder);
 		item.order = dropOrder;
 	}
 	//========================================================================================================================================================
 
-	const [{ isOver }, drop] = useDrop(() => ({
+	const [{ handlerId, isOver }, drop] = useDrop(() => ({
 		accept: 'card',
 		collect(monitor) {
 			return {
+				handlerId: monitor.getHandlerId(),
 				isOver: monitor.isOver(),
 			}
 		},
 		hover: hoverHandle
 	}))
+
+	const [{ isDragging }, drag] = useDrag(() => ({
+		type: 'card',
+		item: () => {
+			return { id, order }
+		},
+		//item: { name: text },
+		collect: (monitor) => ({
+			isDragging: monitor.isDragging(),
+		})
+	}), [],)
+
 
 	const className = () => {
 		if (isDragging) {
@@ -63,7 +67,7 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 
 	drag(drop(ref))
 	return (
-		<div id={id} ref={ref}
+		<div id={id} ref={ref} data-handler-id={handlerId}
 			className={className()} >{text}</div>
 	)
 }
