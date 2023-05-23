@@ -60,9 +60,7 @@ function App() {
 				key={new Date().getTime() + Math.floor(Math.random() * 1000)}
 				id={card.id}
 				order={card.order}
-				index={i}
 				text={card.text}
-				cardList={cardList}
 				apdateState={apdateState}
 			/>
 		)

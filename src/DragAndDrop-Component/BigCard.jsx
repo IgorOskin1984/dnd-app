@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
-const Card = ({ id, text, order, index, cardList, apdateState }) => {
+const Card = ({ id, text, order, apdateState }) => {
 	const ref = useRef(null)
 
 	const [{ isDragging }, drag] = useDrag(() => ({
@@ -16,11 +16,7 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 
 	const hoverHandle = (item, monitor) => {
 		//debugger
-		const dropOrderFunc = () => {
-			let targetItem = cardList.find((item) => item.id === parseInt(ref.current.id));
-			return targetItem.order
-		}
-		const dropOrder = dropOrderFunc()
+
 
 		if (item.order === dropOrder) {
 			return
