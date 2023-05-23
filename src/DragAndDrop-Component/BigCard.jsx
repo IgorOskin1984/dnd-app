@@ -4,7 +4,7 @@ const style = {
 
 }
 
-export const Card = ({ id, text, index, moveCard }) => {
+export const Card = ({ id, order, text, index, moveCard }) => {
 	const ref = useRef(null)
 	const [{ handlerId, isOver }, drop] = useDrop({
 		accept: 'card',
@@ -46,7 +46,7 @@ export const Card = ({ id, text, index, moveCard }) => {
 	const [{ isDragging }, drag] = useDrag({
 		type: 'card',
 		item: () => {
-			return { id, index }
+			return { id, order, index }
 		},
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),

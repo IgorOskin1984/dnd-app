@@ -23,13 +23,21 @@ const Container = () => {
 				key={card.id}
 				index={index}
 				id={card.id}
+				order={card.order}
 				text={card.text}
 				moveCard={moveCard}
 			/>
 		)
 	}, [])
+
+	const sortList = (a, b) => {
+		debugger
+		a.order - b.order
+	}
+
+
 	return (
-		<div className='body' >{cardList.map((card, i) => renderCard(card, i))}</div>
+		<div className='body' >{cardList.sort(sortList()).map((card, i) => renderCard(card, i))}</div>
 	)
 }
 export default Container
