@@ -4,38 +4,14 @@ import { Card } from './DragAndDrop-Component/BigCard';
 
 const Container = () => {
 
-	const [cards, setCards] = useState([
-		{
-			id: 1,
-			text: 'Write a cool JS library',
-		},
-		{
-			id: 2,
-			text: 'Make it generic enough',
-		},
-		{
-			id: 3,
-			text: 'Write README',
-		},
-		{
-			id: 4,
-			text: 'Create some examples',
-		},
-		{
-			id: 5,
-			text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
-		},
-		{
-			id: 6,
-			text: '???',
-		},
-		{
-			id: 7,
-			text: 'PROFIT',
-		},
-	])
+	const [cardList, setCardList] = useState([
+		{ id: 4, order: 4, text: 'Card 4' },
+		{ id: 3, order: 3, text: 'Card 3' },
+		{ id: 2, order: 2, text: 'Card 2' },
+		{ id: 1, order: 1, text: 'Card 1' }
+	]);
 	const moveCard = useCallback((dragIndex, hoverIndex) => {
-		setCards(prevCards => {
+		setCardList(prevCards => {
 			const updatedCards = [...prevCards];
 			[updatedCards[dragIndex], updatedCards[hoverIndex]] = [updatedCards[hoverIndex], updatedCards[dragIndex]];
 			return updatedCards;
@@ -53,7 +29,7 @@ const Container = () => {
 		)
 	}, [])
 	return (
-		<div className='body' >{cards.map((card, i) => renderCard(card, i))}</div>
+		<div className='body' >{cardList.map((card, i) => renderCard(card, i))}</div>
 	)
 }
 export default Container
