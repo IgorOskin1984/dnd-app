@@ -70,16 +70,14 @@ function App() {
 
 
 	return (
-		<DndProvider backend={HTML5Backend}>
-			<div className='App'>
-				<div className="wrapper">
-					{/*<DnDBoards />*/}
-					<div className='body'>
-						{cardList.sort(sortCardList).map((card, i) => renderCard(card, i))}
-					</div>
+		<div className='App'>
+			<div className="wrapper">
+				{/*<DnDBoards />*/}
+				<div className='body'>
+					{cardList.sort(sortCardList).map((card, i) => renderCard(card, i))}
 				</div>
 			</div>
-		</DndProvider>
+		</div>
 	);
 }
 
