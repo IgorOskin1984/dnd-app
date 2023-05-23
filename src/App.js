@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react'
-import { Card } from './Card.js'
 import './App.css'
+import { Card } from './DragAndDrop-Component/BigCard';
 
-export const Container = () => {
+const Container = () => {
 
 	const [cards, setCards] = useState([
 		{
@@ -56,3 +56,4 @@ export const Container = () => {
 		<div className='body' >{cards.map((card, i) => renderCard(card, i))}</div>
 	)
 }
+export default Container
