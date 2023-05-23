@@ -10,12 +10,19 @@ const Container = () => {
 		{ id: 2, order: 2, text: 'Card 2' },
 		{ id: 1, order: 1, text: 'Card 1' }
 	]);
-	const moveCard = useCallback((dragIndex, hoverIndex) => {
-		setCardList(prevCards => {
-			const updatedCards = [...prevCards];
-			[updatedCards[dragIndex], updatedCards[hoverIndex]] = [updatedCards[hoverIndex], updatedCards[dragIndex]];
-			return updatedCards;
-		});
+	const moveCard = useCallback((dragOrder, hoverOrder) => {
+		setCardList(cardList.map((card) => {
+			if (card.order === dragOrder) {
+				card.order = hoverOrder;
+				return card
+			}
+			if (card.order === hoverOrder) {
+				card.order = dragOrder;
+				return card
+			}
+			return card
+		})
+		)
 	}, []);
 	const renderCard = useCallback((card, index) => {
 		return (
