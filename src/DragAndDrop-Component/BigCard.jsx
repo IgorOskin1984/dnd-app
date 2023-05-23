@@ -20,10 +20,8 @@ export const Card = ({ id, order, text, index, moveCard }) => {
 			if (!ref.current) {
 				return
 			}
-			//console.log(item);
 			const dragOrder = item.order
 			const hoverOrder = order
-			console.log(dragOrder, hoverOrder);
 
 			if (dragOrder === hoverOrder) {
 				return
@@ -41,7 +39,7 @@ export const Card = ({ id, order, text, index, moveCard }) => {
 			}
 			moveCard(dragOrder, hoverOrder)
 
-			item.index = hoverOrder
+			item.order = hoverOrder
 		},
 	})
 	const [{ isDragging }, drag] = useDrag({
