@@ -31,10 +31,7 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 			return
 		}
 
-		apdateState(item.id, dropId)
-
-
-
+		//apdateState(item.id, dropId)
 	}
 	//========================================================================================================================================================
 
