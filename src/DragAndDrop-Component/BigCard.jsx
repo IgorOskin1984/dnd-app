@@ -56,12 +56,12 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 
 	const className = () => {
 		if (isDragging) {
-			return 'card isDragging'
+			return 'card' + ' ' + 'isDragging'
 		}
 		if (isOver) {
-			return 'isOver card'
+			return 'card' + ' ' + 'isOver'
 		}
-		else return 'card'
+		return 'card'
 	}
 
 	drag(drop(ref))

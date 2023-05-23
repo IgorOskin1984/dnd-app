@@ -13,29 +13,29 @@ function App() {
 	const [cardList, setCardList] = useState([]);
 
 	const apdateState = (dragId, dropId) => {
-		//debugger
-		const dragIndex = cardList.findIndex((card) => card.id === dragId);
-		const dragCard = cardList[dragIndex];
-		const dropIndex = cardList.findIndex((card) => card.id === dropId);
-		const dropCard = cardList[dropIndex];
+		//const dragIndex = cardList.findIndex((card) => card.id === dragId);
+		//const dragCard = cardList[dragIndex];
+		//const dropIndex = cardList.findIndex((card) => card.id === dropId);
+		//const dropCard = cardList[dropIndex];
 
-		const dragOrder = dragCard.order;
-		const dropOrder = dropCard.order;
+		//const dragOrder = dragCard.order;
+		//const dropOrder = dropCard.order;
 
-		dragCard.order = dropOrder;
-		dropCard.order = dragOrder;
+		//dragCard.order = dropOrder;
+		//dropCard.order = dragOrder;
 
-		cardList.map((card) => {
-			if (card.id === dragCard.id) {
-				return card = dragCard
-			}
-			if (card.id === dropCard.id) {
-				return card = dropCard
-			}
-			return card
-		})
-		localStorage.setItem('cardList', JSON.stringify(cardList))
-		setCardList([...cardList])
+		//cardList.map((card) => {
+		//	if (card.id === dragCard.id) {
+		//		return card = dragCard
+		//	}
+		//	if (card.id === dropCard.id) {
+		//		return card = dropCard
+		//	}
+		//	return card
+		//})
+		//localStorage.setItem('cardList', JSON.stringify(cardList))
+		//setCardList([...cardList])
+		console.log('apdate');
 	};
 
 	const sortCardList = (a, b) => a.order - b.order;
