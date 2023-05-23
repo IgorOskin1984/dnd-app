@@ -20,24 +20,20 @@ const Card = ({ id, text, order, index, cardList, apdateState }) => {
 			return
 		}
 		//debugger
-		const hoverBoundingRect = ref.current.getBoundingClientRect()
-		const rightSide = hoverBoundingRect.right - (hoverBoundingRect.right - hoverBoundingRect.left) / 3
-		const leftSide = hoverBoundingRect.left + (hoverBoundingRect.right - hoverBoundingRect.left) / 3
-
+		const hoverBoundingRect = ref.current?.getBoundingClientRect()
+		const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 		const clientOffset = monitor.getClientOffset()
-
-		if (clientOffset.x >= leftSide && clientOffset.x <= rightSide) {
-			//debugger
+		const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+		if (hoverClientX > hoverMiddleX) {
 			apdateState(item.id, dropId)
 		}
+
+
 	}
 	//========================================================================================================================================================
 
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'card',
-		drop: (item) => {
-			return { id };
-		},
 		collect(monitor) {
 			return {
 				isOver: monitor.isOver(),
