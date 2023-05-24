@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
-export const Card = ({ id, text, order, apdateState }) => {
+export const Card = ({ id, text, order, updateState }) => {
 	const ref = useRef(null)
 
 	const [{ isDragging }, drag] = useDrag({
@@ -42,7 +42,7 @@ export const Card = ({ id, text, order, apdateState }) => {
 			if (dragOrder > hoverOrder && hoverClientX > hoverMiddleX) {
 				return
 			}
-			apdateState(dragOrder, hoverOrder)
+			updateState(dragOrder, hoverOrder)
 
 			item.order = hoverOrder
 		},
