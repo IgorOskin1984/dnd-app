@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import { Card } from './DragAndDrop-Component/BigCard';
 
@@ -24,24 +24,16 @@ const Container = () => {
 			return card
 		})
 		)
-		//localStorage.setItem('cardList', JSON.stringify(cardList))
-		//console.log('apdate');
+		localStorage.setItem('cardList', JSON.stringify(cardList))
 	}, [])
 
-	//useEffect(() => {
-	//	const initialState = [
-	//		{ id: 4, order: 4, text: 'Card 4' },
-	//		{ id: 3, order: 3, text: 'Card 3' },
-	//		{ id: 2, order: 2, text: 'Card 2' },
-	//		{ id: 1, order: 1, text: 'Card 1' }
-	//	]
-	//	const listArray = JSON.parse(localStorage.getItem('cardList'))
-	//	//debugger
-	//	if (!listArray.length) {
-	//		localStorage.setItem('cardList', JSON.stringify(initialState))
-	//	}
-	//	setCardList(listArray)
-	//}, [])
+	useEffect(() => {
+		const listArray = JSON.parse(localStorage.getItem('cardList'))
+		if (!listArray.length) {
+			localStorage.setItem('cardList', JSON.stringify(cardList))
+		}
+		setCardList(listArray)
+	}, [])
 
 	const renderCard = useCallback((card, i) => {
 		return (

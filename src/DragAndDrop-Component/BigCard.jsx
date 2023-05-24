@@ -7,7 +7,6 @@ export const Card = ({ id, text, order, apdateState }) => {
 	const [{ isDragging }, drag] = useDrag({
 		type: 'card',
 		item: { id, order },
-		//item: { name: text },
 		collect: (monitor) => ({
 			isDragging: !!monitor.isDragging(),
 		})
