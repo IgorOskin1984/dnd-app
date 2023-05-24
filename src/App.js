@@ -15,19 +15,24 @@ const Container = () => {
 	});
 
 	const updateState = useCallback((dragOrder, hoverOrder) => {
-		setCardList(cardList.map((card) => {
+		const updatedCardList = cardList.map((card) => {
 			if (card.order === dragOrder) {
 				card.order = hoverOrder;
-				return card
+				return card;
 			}
 			if (card.order === hoverOrder) {
 				card.order = dragOrder;
-				return card
+				return card;
 			}
-			return card
-		})
-		)
-	}, [])
+			return card;
+		});
+
+		setCardList(updatedCardList);
+	}, [cardList]);
+
+	useEffect(() => {
+		localStorage.setItem('cardList', JSON.stringify(cardList));
+	}, [cardList]);
 
 	useEffect(() => {
 		const listArray = JSON.parse(localStorage.getItem('cardList'))
