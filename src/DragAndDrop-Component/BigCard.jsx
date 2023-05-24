@@ -4,10 +4,17 @@ import imageStar from './../img/Star.svg'
 
 export const Card = ({ id, text, order, updateState }) => {
 	const ref = useRef(null)
+	const dropDone = (dropResult) => {
+		console.log(dropResult);
+	}
 
 	const [{ isDragging }, drag, preview] = useDrag({
 		type: 'card',
 		item: { id, text, order },
+		end: (item, monitor) => {
+			const dropResult = monitor.getDropResult()
+			dropDone(dropResult)
+		},
 		collect: (monitor) => ({
 			isDragging: !!monitor.isDragging(),
 		})
