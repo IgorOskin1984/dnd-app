@@ -51,7 +51,6 @@ const Container = () => {
 		return (
 			<Card
 				key={card.id}
-				index={index}
 				id={card.id}
 				order={card.order}
 				text={card.text}
