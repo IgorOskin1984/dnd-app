@@ -12,7 +12,6 @@ const Container = () => {
 	]);
 
 	const apdateState = useCallback((dragOrder, hoverOrder) => {
-		//debugger
 		setCardList(cardList.map((card) => {
 			if (card.order === dragOrder) {
 				card.order = hoverOrder;
@@ -25,13 +24,9 @@ const Container = () => {
 			return card
 		})
 		)
-
 		//localStorage.setItem('cardList', JSON.stringify(cardList))
 		//console.log('apdate');
 	}, [])
-
-	const sortCardList = (a, b) => a.order - b.order;
-
 
 	//useEffect(() => {
 	//	const initialState = [
