@@ -4,16 +4,16 @@ import { useDrag, useDrop } from 'react-dnd'
 export const Card = ({ id, text, order, apdateState }) => {
 	const ref = useRef(null)
 
-	const [{ isDragging }, drag] = useDrag(() => ({
+	const [{ isDragging }, drag] = useDrag({
 		type: 'card',
 		item: { id, order },
 		//item: { name: text },
 		collect: (monitor) => ({
 			isDragging: !!monitor.isDragging(),
 		})
-	}), [],)
+	})
 
-	const [{ isOver }, drop] = useDrop(() => ({
+	const [{ isOver }, drop] = useDrop({
 		accept: 'card',
 		//!===
 		collect(monitor) {
@@ -47,7 +47,7 @@ export const Card = ({ id, text, order, apdateState }) => {
 
 			item.order = hoverOrder
 		},
-	}))
+	})
 	//========================================================================================================================================================
 
 
