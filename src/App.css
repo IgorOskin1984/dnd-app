@@ -29,8 +29,7 @@
 }
 
 .isDragging {
-	opacity: 0;
-	/*visibility: hidden;*/
+	opacity: 0.5;
 }
 
 .isOver {
