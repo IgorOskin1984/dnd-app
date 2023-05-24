@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 const Card = ({ id, text, order, apdateState }) => {
@@ -15,9 +15,11 @@ const Card = ({ id, text, order, apdateState }) => {
 
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'card',
+		//!===
 		collect(monitor) {
 			return {
-				isOver: monitor.isOver(),
+				handlerId: monitor.getHandlerId(),
+				isOver: monitor.isOver()
 			}
 		},
 		hover: (item, monitor) => {
@@ -39,26 +41,56 @@ const Card = ({ id, text, order, apdateState }) => {
 				return
 			}
 
-			apdateState(dragOrder, hoverOrder);
-			item.order = hoverOrder;
+			apdateState(item.order, dropOrder);
+			item.order = dropOrder;
 		}
-	}))
+	//========================================================================================================================================================
+
+	const [{ isOver }, drop] = useDrop(() => ({
+			accept: 'card',
+			collect(monitor) {
+				return {
+					isOver: monitor.isOver(),
+				}
+			},
+			hover: (item, monitor) => {
+				const dragOrder = item.order;
+				const hoverOrder = order;
+				console.log(dragOrder, hoverOrder);
+
+				if (dragOrder === hoverOrder) {
+					return
+				}
+				const hoverBoundingRect = ref.current?.getBoundingClientRect()
+				const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+				const clientOffset = monitor.getClientOffset()
+				const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+				if (dragOrder < hoverOrder && hoverClientX < hoverMiddleX) {
+					return
+				}
+				if (dragOrder > hoverOrder && hoverClientX > hoverMiddleX) {
+					return
+				}
+
+				apdateState(dragOrder, hoverOrder);
+				item.order = hoverOrder;
+			}
+		}))
 
 	const className = () => {
-		if (isDragging) {
-			return 'card' + ' ' + 'isDragging'
+			if (isDragging) {
+				return 'card' + ' ' + 'isDragging'
+			}
+			if (isOver) {
+				return 'card' + ' ' + 'isOver'
+			}
+			return 'card'
 		}
-		if (isOver) {
-			return 'card' + ' ' + 'isOver'
-		}
-		return 'card'
-	}
 
 	drag(drop(ref))
 	return (
-		<div id={id} ref={ref}
-			className={className()} >{text}</div>
+		<div className={className()} ref={ref} data-handler-id={handlerId}>
+			{text}
+		</div>
 	)
 }
-
-export default Card

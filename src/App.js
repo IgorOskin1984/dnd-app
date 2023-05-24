@@ -1,15 +1,8 @@
-import './App.css';
-import { useCallback, useEffect, useState } from 'react';
-import { DnDBoards } from './DragAndDrop-Component/DnD_Boards';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import Card from './DragAndDrop-Component/BigCard';
+import { useCallback, useState } from 'react'
+import './App.css'
+import { Card } from './DragAndDrop-Component/BigCard';
 
-//ES7+ React/Redux/React-Native snippets
-//rafce - создаёт компоненту
-
-
-function App() {
+const Container = () => {
 
 	const [cardList, setCardList] = useState([
 		{ id: 4, order: 4, text: 'Card 4' },
@@ -57,7 +50,8 @@ function App() {
 	const renderCard = useCallback((card, i) => {
 		return (
 			<Card
-				key={new Date().getTime() + Math.floor(Math.random() * 1000)}
+				key={card.id}
+				index={index}
 				id={card.id}
 				order={card.order}
 				text={card.text}
@@ -65,6 +59,8 @@ function App() {
 			/>
 		)
 	}, [])
+
+	const sortList = (a, b) => a.order - b.order
 
 
 	return (
@@ -78,5 +74,4 @@ function App() {
 		</div>
 	);
 }
-
-export default App;
+export default Container
