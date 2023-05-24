@@ -11,10 +11,10 @@ export const Card = ({ id, text, order, updateState }) => {
 	const [{ isDragging }, drag, preview] = useDrag({
 		type: 'card',
 		item: { id, text, order },
-		end: (item, monitor) => {
-			const dropResult = monitor.getDropResult()
-			dropDone(dropResult)
-		},
+		//end: (item, monitor) => {
+		//	const dropResult = monitor.getDropResult()
+		//	dropDone(dropResult)
+		//},
 		collect: (monitor) => ({
 			isDragging: !!monitor.isDragging(),
 		})
