@@ -66,7 +66,7 @@ export const Card = ({ id, text, order, updateState }) => {
 	const image = imageStar
 	return (
 		<>
-			<DragPreviewImage connect={preview} src={image} />
+			{/*<DragPreviewImage connect={preview} src={image} />*/}
 			<div className={className()} ref={ref} >
 				{text}
 			</div>

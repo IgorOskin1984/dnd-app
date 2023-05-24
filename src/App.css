@@ -15,7 +15,8 @@
 }
 
 
-.card {
+.card,
+.draggCard {
 	width: 300px;
 	height: 300px;
 	background-color: #61dafb;
@@ -26,10 +27,15 @@
 	font-weight: 600;
 	cursor: grab;
 	transition: background-color .3s ease 0s;
+	text-align: center;
+}
+
+.draggCard {
+	background-color: #53e046;
 }
 
 .isDragging {
-	opacity: 0.5;
+	opacity: 0;
 }
 
 .isOver {

@@ -13,7 +13,7 @@ export const CustomDragLayer = () => {
 	}
 
 	return (
-		<div className='card'
+		<div className='draggCard'
 			style={{
 				position: 'fixed',
 				pointerEvents: 'none',
