@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import { Card } from './DragAndDrop-Component/BigCard';
+import CustomDragLayer from './DragAndDrop-Component/CustomDragLayer';
 
 const Container = () => {
 
@@ -63,6 +64,7 @@ const Container = () => {
 			<div className="wrapper">
 				{/*<DnDBoards />*/}
 				<div className='body'>
+					<CustomDragLayer />
 					{cardList.sort(sortList).map((card, i) => renderCard(card, i))}
 				</div>
 			</div>

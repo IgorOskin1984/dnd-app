@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { DragPreviewImage, useDrag, useDrop } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd'
 import imageStar from './../img/Star.svg'
 
 export const Card = ({ id, text, order, updateState }) => {
