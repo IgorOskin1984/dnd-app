@@ -12,6 +12,7 @@ const Container = () => {
 	]);
 
 	const apdateState = useCallback((dragOrder, hoverOrder) => {
+		//debugger
 		setCardList(cardList.map((card) => {
 			if (card.order === dragOrder) {
 				card.order = hoverOrder;
@@ -67,7 +68,7 @@ const Container = () => {
 			<div className="wrapper">
 				{/*<DnDBoards />*/}
 				<div className='body'>
-					{cardList.sort(sortCardList).map((card, i) => renderCard(card, i))}
+					{cardList.sort(sortList).map((card, i) => renderCard(card, i))}
 				</div>
 			</div>
 		</div>
