@@ -8,7 +8,6 @@ import { TouchBackend } from 'react-dnd-touch-backend';
 import App from './App';
 
 const isTouchDevice = 'ontouchstart' in window;
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
