@@ -31,6 +31,7 @@ const Container = () => {
 	}, [cardList]);
 
 	useEffect(() => {
+
 		localStorage.setItem('cardList', JSON.stringify(cardList));
 	}, [cardList]);
 
