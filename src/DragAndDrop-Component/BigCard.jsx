@@ -1,11 +1,10 @@
 import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import imageStar from './../img/Star.svg'
 
 export const Card = ({ id, text, order, updateState }) => {
 	const ref = useRef(null)
 
-	const [{ isDragging }, drag, preview] = useDrag({
+	const [{ isDragging }, drag] = useDrag({
 		type: 'card',
 		item: { id, text, order },
 		end: (item, monitor) => {
@@ -54,25 +53,21 @@ export const Card = ({ id, text, order, updateState }) => {
 			item.order = hoverOrder
 		},
 	})
-	//========================================================================================================================================================
-
 
 	const className = () => {
 		if (isDragging) {
-			return 'card' + ' ' + 'isDragging'
+			return 'card isDragging'
 		}
 		if (isOver) {
-			return 'card' + ' ' + 'isOver'
+			return 'card isOver'
 		}
 		return 'card'
 	}
 
 	drag(drop(ref))
 
-	const image = imageStar
 	return (
 		<>
-			{/*<DragPreviewImage connect={preview} src={image} />*/}
 			<div className={className()} ref={ref} >
 				{text}
 			</div>

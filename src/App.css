@@ -32,6 +32,7 @@
 
 .draggCard {
 	background-color: #53e046;
+	max-width: 20%;
 }
 
 .isDragging {
