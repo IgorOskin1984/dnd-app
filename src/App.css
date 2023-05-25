@@ -1,6 +1,10 @@
 .App {}
 
-.wrapper {}
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	padding: 0 20px;
+}
 
 .body {
 	text-align: center;
@@ -11,7 +15,8 @@
 }
 
 
-.card {
+.card,
+.draggCard {
 	width: 300px;
 	height: 300px;
 	background-color: #61dafb;
@@ -22,6 +27,33 @@
 	font-weight: 600;
 	cursor: grab;
 	transition: background-color .3s ease 0s;
+	text-align: center;
+}
+
+.draggCard {
+	background-color: #53e046;
+	max-width: 20%;
+}
+
+.isDragging {
+	opacity: 0;
+}
+
+.isOver {
+	background-color: #f8fb61;
+}
+
+.bin {
+	padding: 20px;
+	width: 90%;
+	border-radius: 10px;
+	text-align: center;
+	flex: 0 1 auto;
+	align-self: center;
+	font-size: 20px;
+	line-height: 1.5;
+	font-weight: 600;
+	border: 1px solid black;
 }
 
 
